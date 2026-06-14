@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Motivational Posters - PosterKadai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="products.js"></script>
+  <script src="cart.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f8f8f8;
+    }
+
+    header {
+      background-color: #000;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      cursor: pointer;
+      animation: waveJump 2s infinite ease-in-out;
+    }
+
+    @keyframes waveJump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #f1a520;
+    }
+
+    .cart-wishlist {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+    }
+
+    .wishlist-icon, .cart-icon {
+      position: relative;
+      margin-left: 15px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    .wishlist-icon:hover, .cart-icon:hover {
+      color: #f1a520;
+    }
+
+    .wishlist-count, .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #f1a520;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-header h2 {
+      color: #f1a520;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .page-header p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .filters-section {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .filters-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-group label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .filter-select {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      font-size: 0.9rem;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 300px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      font-size: 1rem;
+      background: white;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #f1a520;
+      box-shadow: 0 0 0 2px rgba(241, 165, 32, 0.2);
+    }
+
+    .results-count {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .poster-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .poster-item {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+
+    .poster-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .poster-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poster-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .poster-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .wishlist-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.3s;
+      z-index: 2;
+    }
+
+    .wishlist-btn:hover {
+      background: #f1a520;
+      color: white;
+    }
+
+    .wishlist-btn.active {
+      background: #f1a520;
+      color: white;
+    }
+
+    .poster-info {
+      padding: 20px;
+    }
+
+    .poster-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .poster-rating {
+      color: #f1a520;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .poster-price {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    .sale-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #f1a520;
+    }
+
+    .poster-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary {
+      background: #f1a520;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #e6951a;
+    }
+
+    .btn-secondary {
+      background: #25D366;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #1ebe57;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      margin: 40px 0;
+    }
+
+    .no-results h3 {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .no-results .btn {
+      background: #f1a520;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .back-link {
+      display: block;
+      margin: 40px auto;
+      width: max-content;
+      color: #f1a520;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-align: center;
+      border: 2px solid #f1a520;
+      padding: 12px 24px;
+      border-radius: 30px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .back-link:hover {
+      background: #f1a520;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .filters-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-box {
+        max-width: none;
+      }
+
+      .poster-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .poster-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        flex: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 onclick="location.href='index.html'">PosterKadai</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contact</a>
+      <div class="cart-wishlist">
+        <div class="wishlist-icon" onclick="location.href='wishlist.html'">
+          ♥
+          <span class="wishlist-count" id="wishlist-count"></span>
+        </div>
+        <div class="cart-icon" onclick="location.href='cart.html'">
+          🛒
+          <span class="cart-count" id="cart-count"></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="page-header">
+      <h2>Motivational Posters</h2>
+      <p>Inspire yourself and others with our collection of motivational posters</p>
+    </div>
+
+    <div class="filters-section">
+      <div class="filters-row">
+        <div class="filter-group">
+          <label for="sort">Sort by:</label>
+          <select id="sort" class="filter-select" onchange="applyFilters()">
+            <option value="popularity">Popularity</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="newest">Newest</option>
+            <option value="rating">Highest Rated</option>
+          </select>
+        </div>
+
+        <div class="search-box">
+          <input type="text" id="search" class="search-input" placeholder="Search posters..." onkeyup="applyFilters()">
+        </div>
+
+        <div class="results-count" id="resultsCount">Showing 3 products</div>
+      </div>
+    </div>
+
+    <div class="poster-gallery" id="posterGallery">
+      <!-- Products will be loaded here -->
+    </div>
+
+    <a href="index.html" class="back-link">← Back to Categories</a>
+  </div>
+
+  <script>
+    let allProducts = [];
+    let filteredProducts = [];
+
+    function loadProducts() {
+      // Get all motivational products
+      allProducts = products.filter(product => product.category === 'mot');
+      filteredProducts = [...allProducts];
+      renderProducts();
+      updateResultsCount();
+    }
+
+    function applyFilters() {
+      const searchTerm = document.getElementById('search').value.toLowerCase();
+      const sortBy = document.getElementById('sort').value;
+
+      // Filter by search term
+      filteredProducts = allProducts.filter(product =>
+        product.title.toLowerCase().includes(searchTerm)
+      );
+
+      // Sort products
+      filteredProducts.sort((a, b) => {
+        switch(sortBy) {
+          case 'price-low':
+            return a.salePrice - b.salePrice;
+          case 'price-high':
+            return b.salePrice - a.salePrice;
+          case 'rating':
+            return b.rating - a.rating;
+          case 'newest':
+            return b.id.localeCompare(a.id); // Simple ID-based sorting
+          case 'popularity':
+          default:
+            return b.reviews - a.reviews;
+        }
+      });
+
+      renderProducts();
+      updateResultsCount();
+    }
+
+    function renderProducts() {
+      const gallery = document.getElementById('posterGallery');
+
+      if (filteredProducts.length === 0) {
+        gallery.innerHTML = `
+          <div class="no-results">
+            <h3>No products found</h3>
+            <p>Try adjusting your search or filters</p>
+            <a href="#" class="btn" onclick="clearFilters()">Clear Filters</a>
+          </div>
+        `;
+        return;
+      }
+
+      const productsHtml = filteredProducts.map(product => `
+        <div class="poster-item">
+          <div class="poster-image">
+            <img src="${product.image}" alt="${product.title}" loading="lazy">
+            <button class="wishlist-btn ${cartManager.isInWishlist(product.id) ? 'active' : ''}"
+                    onclick="toggleWishlist('${product.id}')"
+                    title="Add to wishlist">
+              ♥
+            </button>
+          </div>
+          <div class="poster-info">
+            <div class="poster-title">${product.title}</div>
+            <div class="poster-rating">⭐ ${product.rating}/5 — ${product.reviews} reviews</div>
+            <div class="poster-price">
+              <span class="original-price">₹${product.originalPrice}</span>
+              <span class="sale-price">₹${product.salePrice}</span>
+            </div>
+            <div class="poster-actions">
+              <a href="product.html?id=${product.id}" class="btn btn-primary">View Details</a>
+              <button class="btn btn-secondary" onclick="addToCart('${product.id}')">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      gallery.innerHTML = productsHtml;
+    }
+
+    function updateResultsCount() {
+      const count = document.getElementById('resultsCount');
+      count.textContent = `Showing ${filteredProducts.length} product${filteredProducts.length !== 1 ? 's' : ''}`;
+    }
+
+    function toggleWishlist(productId) {
+      const product = getProductById(productId);
+      if (cartManager.isInWishlist(productId)) {
+        cartManager.removeFromWishlist(productId);
+        showNotification('Removed from wishlist!');
+      } else {
+        cartManager.addToWishlist(productId);
+        showNotification('Added to wishlist!');
+      }
+      renderProducts(); // Re-render to update button states
+    }
+
+    function addToCart(productId) {
+      const product = getProductById(productId);
+      cartManager.addToCart(productId, 'A4', 'No Frame', 'Matte', 1);
+      showNotification('Added to cart!');
+    }
+
+    function clearFilters() {
+      document.getElementById('search').value = '';
+      document.getElementById('sort').value = 'popularity';
+      applyFilters();
+    }
+
+    function showNotification(message) {
+      // Create notification element
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #28a745;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 1000;
+        font-weight: 600;
+        opacity: 0;
+        transition: opacity 0.3s;
+      `;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+
+      // Show notification
+      setTimeout(() => notification.style.opacity = '1', 10);
+
+      // Hide and remove notification
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => document.body.removeChild(notification), 300);
+      }, 3000);
+    }
+
+    // Initialize
+    loadProducts();
+    cartManager.updateCartCount();
+    cartManager.updateWishlistCount();
+
+    // Listen for storage changes to update counters when items are added/removed from other pages
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'posterKadai_cart' || e.key === 'posterKadai_wishlist') {
+        cartManager.updateCartCount();
+        cartManager.updateWishlistCount();
+      }
+    });
+
+    // Also update on page visibility change (when user switches tabs/back)
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) {
+        cartManager.updateCartCount();
+        cartManager.updateWishlistCount();
+      }
+    });
+  </script>
+
+</body>
+</html>

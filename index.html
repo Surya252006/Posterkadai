@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PosterKadai - Vibe It. Print It. Frame It.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #000;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      cursor: pointer;
+      display: inline-block;
+      animation: waveJump 2s ease-in-out infinite;
+    }
+    @keyframes waveJump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #f1a520;
+    }
+
+    .cart-wishlist {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+    }
+
+    .wishlist-icon, .cart-icon {
+      position: relative;
+      margin-left: 15px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    .wishlist-icon:hover, .cart-icon:hover {
+      color: #f1a520;
+    }
+
+    .wishlist-count, .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #f1a520;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .nav-categories {
+      display: flex;
+      gap: 15px;
+      margin-left: 30px;
+    }
+    .nav-categories a {
+      font-size: 0.9rem;
+      padding: 5px 10px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.1);
+      transition: background 0.3s ease;
+    }
+    .nav-categories a:hover {
+      background: rgba(241, 165, 32, 0.2);
+      color: #f1a520;
+    }
+    .tagline {
+      text-align: center;
+      font-size: 24px;
+      margin: 25px 0;
+      font-weight: 600;
+      color: #333;
+    }
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+    .search-container input[type="text"] {
+      width: 70%;
+      padding: 12px 15px;
+      font-size: 1.1rem;
+      border: 2px solid #f1a520;
+      border-radius: 30px 0 0 30px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .search-container input[type="text"]:focus {
+      border-color: #ff6f61;
+    }
+    .search-container button {
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      border: none;
+      background: #f1a520;
+      color: white;
+      font-weight: 600;
+      border-radius: 0 30px 30px 0;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .search-container button:hover {
+      background: #ff6f61;
+    }
+    .poster-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 0 20px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .poster-item {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      background: #fff;
+      cursor: pointer;
+    }
+    .poster-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+    .poster-item img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+    }
+    .info-section {
+      background: #f7f7f7;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .info-section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #f1a520;
+    }
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .info-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s ease;
+    }
+    .info-card:hover {
+      box-shadow: 0 6px 15px rgba(241, 165, 32, 0.5);
+    }
+    .info-card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #f1a520;
+    }
+    .info-card p {
+      font-size: 16px;
+      color: #444;
+    }
+    /* Contact Section */
+    .contact {
+      background: linear-gradient(135deg, #f8f2f2 0%, #f0eeee 100%);
+      padding: 40px 20px;
+      border-radius: 12px;
+      text-align: center;
+      color: #3d003d;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+      max-width: 400px;
+      margin: 40px auto 60px;
+    }
+    .contact h2 {
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+    .contact p {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #4a003a;
+    }
+    .contact p span {
+      color: #ff007f;
+      font-weight: 700;
+    }
+    .contact p:last-of-type {
+      color: #66004d;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .whatsapp-button {
+      display: inline-block;
+      background: #25D366;
+      color: white;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.5);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .whatsapp-button:hover {
+      background: #1ebe57;
+      box-shadow: 0 8px 20px rgba(30, 190, 87, 0.7);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 800px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+    .faq-section h2 {
+      text-align: center;
+      color: #f1a520;
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+    }
+    .faq-item {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+    .faq-question {
+      cursor: pointer;
+      padding: 18px 25px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #333;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+    .faq-question:hover {
+      background: #f1a520;
+      color: white;
+    }
+    .faq-icon {
+      font-size: 1.5rem;
+      margin-left: 15px;
+      transition: transform 0.3s ease;
+    }
+    .faq-answer {
+      padding: 15px 25px;
+      font-size: 1rem;
+      color: #555;
+      display: none;
+      border-top: 1px solid #ddd;
+      line-height: 1.5;
+      background: #fafafa;
+    }
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+      color: white;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .poster-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      }
+      .search-container input[type="text"] {
+        width: 60%;
+      }
+    }
+    /* Footer styling with top border */
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 20px 30px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      border-top: 2px solid #f1a520;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 onclick="location.href='index.html'">PosterKadai</h1>
+    <nav>
+      <div class="nav-categories">
+        <a href="motivational.html">Motivational</a>
+        <a href="tamilquote.html">Tamil Quotes</a>
+        <a href="cinema.html">Cinema</a>
+        <a href="customname.html">Custom Name</a>
+        <a href="startup.html">Startup</a>
+        <a href="bike.html">Bike</a>
+        <a href="car.html">Car</a>
+        <a href="mus.html">Music</a>
+      </div>
+      <a href="contact.html">Contact</a>
+      <div class="cart-wishlist">
+        <div class="wishlist-icon" onclick="location.href='wishlist.html'">
+          ♥
+          <span class="wishlist-count" id="wishlist-count"></span>
+        </div>
+        <div class="cart-icon" onclick="location.href='cart.html'">
+          🛒
+          <span class="cart-count" id="cart-count"></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="tagline">Vibe It. Print It. Frame It.</div>
+
+  <div class="search-container">
+    <form id="searchForm" onsubmit="return handleSearch(event)">
+      <input type="text" id="searchInput" placeholder="Search posters... e.g. motivational, cinema" required />
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  <section class="poster-gallery" id="gallery" aria-label="Poster categories">
+    <div class="poster-item" onclick="location.href='motivational.html'" tabindex="0" role="button" aria-label="Motivational Posters">
+      <img src="product/mot/mot1.png" alt="Motivational Poster" />
+    </div>
+    <div class="poster-item" onclick="location.href='tamilquote.html'" tabindex="0" role="button" aria-label="Tamil Quote Posters">
+      <img src="product/tam/tam1.png" alt="Tamil Quote Poster" />
+    </div>
+    <div class="poster-item" onclick="location.href='cinema.html'" tabindex="0" role="button" aria-label="Cinema Posters">
+      <img src="product/cin/cin1.png" alt="Cinema Poster" />
+    </div>
+    <div class="poster-item" onclick="location.href='customname.html'" tabindex="0" role="button" aria-label="Custom Name Art">
+      <img src="product/cus/cus1.png" alt="Custom Name Art" />
+    </div>
+    <div class="poster-item" onclick="location.href='startup.html'" tabindex="0" role="button" aria-label="Startup Posters">
+      <img src="product/st/sta1.png" alt="Startup Poster" />
+    </div>
+    <div class="poster-item" onclick="location.href='bike.html'" tabindex="0" role="button" aria-label="bike posters">
+      <img src="product/bik/bik1.png" alt="bike Poster" />
+    </div>
+    <div class="poster-item" onclick="location.href='car.html'" tabindex="0" role="button" aria-label="car Posters">
+      <img src="product/car/car1.png" alt="car Poster" />
+    </div>
+    <div class="poster-item" onclick="location.href='mus.html'" tabindex="0" role="button" aria-label="music Posters">
+      <img src="product/mus/mus1.png" alt="music poster" />
+    </div>
+  </section>
+
+  <section class="trending-section" aria-label="Trending Posters">
+    <h2>🔥 Trending Now: Cars & Bikes</h2>
+    <div class="trending-gallery">
+      <div class="poster-item" onclick="location.href='car.html'" tabindex="0" role="button" aria-label="Car Posters">
+        <img src="product/car/car1.png" alt="Car Poster" />
+      </div>
+      <div class="poster-item" onclick="location.href='bike.html'" tabindex="0" role="button" aria-label="Bike Posters">
+        <img src="product/bik/bik1.png" alt="Bike Poster" />
+      </div>
+      <div class="poster-item" onclick="location.href='car.html'" tabindex="0" role="button" aria-label="Car Posters">
+        <img src="product/car/car2.png" alt="Car Poster" />
+      </div>
+      <div class="poster-item" onclick="location.href='bike.html'" tabindex="0" role="button" aria-label="Bike Posters">
+        <img src="product/bik/bik2.png" alt="Bike Poster" />
+      </div>
+    </div>
+  </section>
+
+  <section class="categories-section" aria-label="Poster Categories">
+    <h2>Explore Our Categories</h2>
+    <div class="categories-grid">
+      <div class="category-item" onclick="location.href='motivational.html'">
+        <img src="product/mot/mot1.png" alt="Motivational Posters" />
+        <div class="category-info">
+          <h3>Motivational Quotes</h3>
+          <p>Inspiring and empowering quotes with modern typography.</p>
+        </div>
+      </div>
+      <div class="category-item" onclick="location.href='cinema.html'">
+        <img src="product/cin/cin1.png" alt="Cinema Posters" />
+        <div class="category-info">
+          <h3>Cinema Posters</h3>
+          <p>Iconic movie posters and dialogues that capture the magic of cinema.</p>
+        </div>
+      </div>
+      <div class="category-item" onclick="location.href='customname.html'">
+        <img src="product/cus/cus1.png" alt="Custom Name Art" />
+        <div class="category-info">
+          <h3>Minimalist Art</h3>
+          <p>Clean lines, simple designs, and calming color palettes.</p>
+        </div>
+      </div>
+      <div class="category-item" onclick="location.href='tamilquote.html'">
+        <img src="product/tam/tam1.png" alt="Tamil Quote Posters" />
+        <div class="category-info">
+          <h3>Cultural Heritage</h3>
+          <p>Posters showcasing Tamil culture, traditional art forms, and folklore.</p>
+        </div>
+      </div>
+      <div class="category-item" onclick="location.href='car.html'">
+        <img src="product/car/car1.png" alt="Car Posters" />
+        <div class="category-info">
+          <h3>Abstract Designs</h3>
+          <p>Bold shapes, vibrant colors, and contemporary abstract art.</p>
+        </div>
+      </div>
+      <div class="category-item" onclick="location.href='bike.html'">
+        <img src="product/bik/bik1.png" alt="Bike Posters" />
+        <div class="category-info">
+          <h3>Urban and Street Art</h3>
+          <p>Graffiti, cityscapes, and modern urban aesthetics.</p>
+        </div>
+      </div>
+      <div class="category-item" onclick="location.href='startup.html'">
+        <img src="product/st/sta1.png" alt="Startup Posters" />
+        <div class="category-info">
+          <h3>Vintage and Retro</h3>
+          <p>Nostalgic designs, classic posters, and retro color schemes.</p>
+        </div>
+      </div>
+      <div class="category-item" onclick="location.href='mus.html'">
+        <img src="product/mus/mus1.png" alt="Music Posters" />
+        <div class="category-info">
+          <h3>Travel and Adventure</h3>
+          <p>Wanderlust-inspired posters with famous destinations and travel quotes.</p>
+        </div>
+      </div>
+      <div class="category-item" onclick="location.href='motivational.html'">
+        <img src="product/mot/mot2.png" alt="Nature Posters" />
+        <div class="category-info">
+          <h3>Nature and Landscapes</h3>
+          <p>Trendy, high-quality photos of nature, mountains, forests, and beaches.</p>
+        </div>
+      </div>
+      <div class="category-item" onclick="location.href='cinema.html'">
+        <img src="product/cin/cin2.png" alt="Wellness Posters" />
+        <div class="category-info">
+          <h3>Wellness and Mindfulness</h3>
+          <p>Calming designs, yoga poses, and peaceful affirmations.</p>
+        </div>
+      </div>
+      <div class="category-item" onclick="location.href='customname.html'">
+        <img src="product/cus/cus2.jpeg" alt="Seasonal Posters" />
+        <div class="category-info">
+          <h3>Seasonal Themes</h3>
+          <p>Posters inspired by seasons—spring, summer, autumn, winter—and related festivities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section" aria-label="Why choose PosterKadai">
+    <h2>Why Choose PosterKadai?</h2>
+    <div class="info-cards">
+      <div class="info-card">
+        <h3>🎨 Custom Designs</h3>
+        <p>Get posters personalized with your name, quotes, or favorite characters. 100% unique to you!</p>
+      </div>
+      <div class="info-card">
+        <h3>✅ Quality Guaranteed</h3>
+        <p>Printed on premium paper with vivid colors and long-lasting finish. We promise satisfaction.</p>
+      </div>
+      <div class="info-card">
+        <h3>🔥 Exclusive Offers</h3>
+        <p>Buy 2 Get 1 Free, Festival Discounts, Student Offers & more. Follow us for updates!</p>
+      </div>
+      <div class="info-card">
+        <h3>🚚 Fast Shipping</h3>
+        <p>We pack and dispatch posters from Coimbatore with love. Fast, safe, and reliable delivery.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="custom" aria-label="Contact PosterKadai">
+    <h2>Want Custom Posters?</h2>
+    <p>DM us on Instagram <span>@PosterKadai</span></p>
+    <p>Or message directly on WhatsApp:</p>
+    <a href="https://wa.me/message/2OZFLDQJF5J3B1" target="_blank" rel="noopener noreferrer" class="whatsapp-button" aria-label="Order on WhatsApp">Order on WhatsApp</a>
+  </section>
+
+  <section class="featured-artists-section" aria-label="Featured Artists">
+    <h2>🎨 Meet Our Featured Artists</h2>
+    <div class="artists-grid">
+      <div class="artist-card" onclick="location.href='artists.html'">
+        <img src="product/art/artist1.jpg" alt="Artist Profile" />
+        <div class="artist-info">
+          <h3>Rajesh Kumar</h3>
+          <p>Digital Artist specializing in minimalist designs</p>
+          <span class="artist-specialty">Minimalist Art</span>
+        </div>
+      </div>
+      <div class="artist-card" onclick="location.href='artists.html'">
+        <img src="product/art/artist2.jpg" alt="Artist Profile" />
+        <div class="artist-info">
+          <h3>Priya Sharma</h3>
+          <p>Traditional artist with modern Tamil art interpretations</p>
+          <span class="artist-specialty">Cultural Heritage</span>
+        </div>
+      </div>
+      <div class="artist-card" onclick="location.href='artists.html'">
+        <img src="product/art/artist3.jpg" alt="Artist Profile" />
+        <div class="artist-info">
+          <h3>Amit Patel</h3>
+          <p>Street artist creating urban and abstract designs</p>
+          <span class="artist-specialty">Urban Art</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-section" aria-label="Customer Testimonials">
+    <h2>⭐ What Our Customers Say</h2>
+    <div class="testimonials-container">
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <p>"Absolutely love my custom name poster! The quality is amazing and it arrived exactly as shown. PosterKadai never disappoints!"</p>
+          <div class="testimonial-author">
+            <img src="product/testimonials/user1.jpg" alt="Customer" />
+            <div>
+              <h4>Sarah Johnson</h4>
+              <span>Chennai, Tamil Nadu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <p>"The motivational posters from PosterKadai have transformed my workspace. Beautiful designs and fast delivery!"</p>
+          <div class="testimonial-author">
+            <img src="product/testimonials/user2.jpg" alt="Customer" />
+            <div>
+              <h4>Ravi Kumar</h4>
+              <span>Bangalore, Karnataka</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <p>"Perfect gift for my sister's birthday! The cinema poster collection is extensive and the framing quality is top-notch."</p>
+          <div class="testimonial-author">
+            <img src="product/testimonials/user3.jpg" alt="Customer" />
+            <div>
+              <h4>Meera Patel</h4>
+              <span>Mumbai, Maharashtra</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog-section" aria-label="Latest Blog Posts">
+    <h2>📝 Design Inspiration & Tips</h2>
+    <div class="blog-grid">
+      <article class="blog-card" onclick="location.href='blog.html'">
+        <img src="product/blog/poster-trends.jpg" alt="Poster Trends" />
+        <div class="blog-content">
+          <h3>2025 Poster Design Trends</h3>
+          <p>Discover the latest trends in poster design that are taking the world by storm...</p>
+          <span class="blog-date">March 15, 2025</span>
+        </div>
+      </article>
+      <article class="blog-card" onclick="location.href='blog.html'">
+        <img src="product/blog/color-psychology.jpg" alt="Color Psychology" />
+        <div class="blog-content">
+          <h3>Color Psychology in Poster Design</h3>
+          <p>How colors influence emotions and how to use them effectively in your designs...</p>
+          <span class="blog-date">March 10, 2025</span>
+        </div>
+      </article>
+      <article class="blog-card" onclick="location.href='blog.html'">
+        <img src="product/blog/custom-design.jpg" alt="Custom Design Guide" />
+        <div class="blog-content">
+          <h3>Creating the Perfect Custom Poster</h3>
+          <p>A complete guide to designing personalized posters that reflect your style...</p>
+          <span class="blog-date">March 5, 2025</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="about-section" aria-label="About PosterKadai">
+    <h2>🏢 About PosterKadai</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>Founded in 2020, PosterKadai has been at the forefront of digital poster design in India. Based in the vibrant city of Coimbatore, we combine traditional artistry with modern design techniques to create posters that tell stories and inspire emotions.</p>
+        <p>Our team of talented artists and designers work tirelessly to bring you unique, high-quality posters that transform ordinary spaces into extraordinary experiences. From motivational quotes to custom name art, we cater to every taste and occasion.</p>
+        <a href="about.html" class="about-button">Learn More About Us</a>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item">
+          <h3>50K+</h3>
+          <p>Happy Customers</p>
+        </div>
+        <div class="stat-item">
+          <h3>1000+</h3>
+          <p>Unique Designs</p>
+        </div>
+        <div class="stat-item">
+          <h3>25+</h3>
+          <p>Artists</p>
+        </div>
+        <div class="stat-item">
+          <h3>4.9/5</h3>
+          <p>Customer Rating</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-section" aria-label="Poster Gallery">
+    <h2>🖼️ Our Design Gallery</h2>
+    <div class="gallery-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="motivational">Motivational</button>
+      <button class="filter-btn" data-filter="cinema">Cinema</button>
+      <button class="filter-btn" data-filter="custom">Custom</button>
+      <button class="filter-btn" data-filter="nature">Nature</button>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" data-category="motivational">
+        <img src="product/mot/mot1.png" alt="Motivational Poster" />
+      </div>
+      <div class="gallery-item" data-category="cinema">
+        <img src="product/cin/cin1.png" alt="Cinema Poster" />
+      </div>
+      <div class="gallery-item" data-category="custom">
+        <img src="product/cus/cus1.png" alt="Custom Name Art" />
+      </div>
+      <div class="gallery-item" data-category="nature">
+        <img src="product/mot/mot2.png" alt="Nature Poster" />
+      </div>
+      <div class="gallery-item" data-category="motivational">
+        <img src="product/tam/tam1.png" alt="Tamil Quote Poster" />
+      </div>
+      <div class="gallery-item" data-category="cinema">
+        <img src="product/st/sta1.png" alt="Startup Poster" />
+      </div>
+    </div>
+    <a href="gallery.html" class="view-all-button">View Full Gallery</a>
+  </section>
+
+  <section class="faq-section" aria-label="Frequently Asked Questions">
+    <h2>FAQs</h2>
+
+    <div class="faq-item">
+      <div class="faq-question" tabindex="0">
+        What types of posters do you offer?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        We offer motivational, Tamil quotes, cinema dialogues, custom name art, startup-themed posters, and many more categories.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" tabindex="0">
+        How can I order a custom poster?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        You can DM us on Instagram @PosterKadai or message directly on WhatsApp using the order button above.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" tabindex="0">
+        What is your shipping policy?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        We ship posters fast and securely from Coimbatore to anywhere in India.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" tabindex="0">
+        Are there any discounts available?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        Yes! We have seasonal offers like Buy 2 Get 1 Free, festival discounts, and student offers. Follow us for updates.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" tabindex="0">
+        Do you offer framing services?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        Yes, we provide professional framing services for all our posters. Choose from various frame styles and sizes.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 PosterKadai. All rights reserved.
+  </footer>
+
+  <script>
+    // Search functionality for category pages
+    function handleSearch(event) {
+      event.preventDefault();
+      const query = document.getElementById('searchInput').value.trim().toLowerCase();
+
+      const pages = {
+        'u1': 'mus.html','car':'car.html','bike':'bike.html','rolls royce':'car.html',
+        'motivational': 'motivational.html',
+        'motivational poster': 'motivational.html',
+        'motivational posters': 'motivational.html',
+        'tamil': 'tamilquote.html',
+        'tamil quote': 'tamilquote.html',
+        'tamil quotes': 'tamilquote.html',
+        'cinema': 'cinema.html',
+        'cinema poster': 'cinema.html',
+        'cinema posters': 'cinema.html',
+        'custom': 'customname.html',
+        'custom name': 'customname.html',
+        'custom name art': 'customname.html',
+        'startup': 'startup.html',
+        'startup poster': 'startup.html',
+        'startup posters': 'startup.html',
+        'minimalist': 'customname.html',
+        'minimalist art': 'customname.html',
+        'cultural': 'tamilquote.html',
+        'cultural heritage': 'tamilquote.html',
+        'abstract': 'car.html',
+        'abstract designs': 'car.html',
+        'urban': 'bike.html',
+        'urban art': 'bike.html',
+        'street art': 'bike.html',
+        'vintage': 'startup.html',
+        'retro': 'startup.html',
+        'travel': 'mus.html',
+        'adventure': 'mus.html',
+        'nature': 'motivational.html',
+        'landscapes': 'motivational.html',
+        'wellness': 'cinema.html',
+        'mindfulness': 'cinema.html',
+        'seasonal': 'customname.html',
+        'themes': 'customname.html',
+      };
+
+      for (const key in pages) {
+        if (query.includes(key)) {
+          window.location.href = pages[key];
+          return false;
+        }
+      }
+      alert('No matching category found. Try: motivational, tamil, cinema, custom, startup');
+      return false;
+    }
+
+    // FAQ toggle
+    document.querySelectorAll('.faq-question').forEach(item => {
+      item.addEventListener('click', () => {
+        const faqItem = item.parentElement;
+        faqItem.classList.toggle('active');
+      });
+      // Keyboard accessible toggle
+      item.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const faqItem = item.parentElement;
+          faqItem.classList.toggle('active');
+        }
+      });
+    });
+
+    // Accessibility: Make poster-items keyboard accessible
+    document.querySelectorAll('.poster-item').forEach(item => {
+      item.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          item.click();
+        }
+      });
+    });
+  </script>
+  <script src="products.js"></script>
+  <script src="cart.js"></script>
+  <script>
+    // Update cart and wishlist counts on page load
+    cartManager.updateCartCount();
+    cartManager.updateWishlistCount();
+
+    // Listen for storage changes to update counters when items are added/removed from other pages
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'posterKadai_cart' || e.key === 'posterKadai_wishlist') {
+        cartManager.updateCartCount();
+        cartManager.updateWishlistCount();
+      }
+    });
+
+    // Also update on page visibility change (when user switches tabs/back)
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) {
+        cartManager.updateCartCount();
+        cartManager.updateWishlistCount();
+      }
+    });
+  </script>
+  <!-- WhatsApp Chat Bot Widget -->
+<script type="text/javascript">
+  (function () {
+    var options = {
+      whatsapp: "919486230195", // Your WhatsApp number with country code
+      call_to_action: "Message us for help!", 
+      position: "right", 
+      pre_filled_message: "Hi! I have a question about your posters.", 
+      welcome_message: "Hi 👋 Welcome to PosterKadai! Ask me anything about posters!",
+      theme_color: "#25D366"
+    };
+    var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+    s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+  })();
+</script>
+
+</body>
+</html>

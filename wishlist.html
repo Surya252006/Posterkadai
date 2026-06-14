@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wishlist - PosterKadai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="products.js"></script>
+  <script src="cart.js"></script>
+  <style>
+    .wishlist-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .wishlist-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .wishlist-header h1 {
+      color: #f1a520;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .empty-wishlist {
+      text-align: center;
+      padding: 60px 20px;
+      background: #f8f8f8;
+      border-radius: 10px;
+      margin: 40px 0;
+    }
+
+    .empty-wishlist h2 {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .empty-wishlist .btn {
+      background: #f1a520;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .wishlist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .wishlist-item {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s;
+      position: relative;
+    }
+
+    .wishlist-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .wishlist-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .wishlist-item-content {
+      padding: 20px;
+    }
+
+    .wishlist-item-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #333;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .wishlist-item-rating {
+      color: #f1a520;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .wishlist-item-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #f1a520;
+      margin-bottom: 15px;
+    }
+
+    .wishlist-item-price del {
+      color: #999;
+      font-weight: 400;
+      margin-right: 8px;
+    }
+
+    .wishlist-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      transition: all 0.3s;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .btn-primary {
+      background: #f1a520;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #e6951a;
+    }
+
+    .btn-secondary {
+      background: #25D366;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #1ebe57;
+    }
+
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #c82333;
+    }
+
+    .remove-wishlist {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(220, 53, 69, 0.9);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .remove-wishlist:hover {
+      background: rgba(200, 35, 51, 0.9);
+    }
+
+    .continue-shopping {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .continue-shopping a {
+      color: #f1a520;
+      text-decoration: none;
+      font-weight: 600;
+      border: 2px solid #f1a520;
+      padding: 12px 24px;
+      border-radius: 6px;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+
+    .continue-shopping a:hover {
+      background: #f1a520;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .wishlist-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+      }
+
+      .wishlist-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        flex: none;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 onclick="location.href='index.html'">PosterKadai</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contact</a>
+      <div class="cart-wishlist">
+        <div class="wishlist-icon" onclick="location.href='wishlist.html'">
+          ♥
+          <span class="wishlist-count" id="wishlist-count"></span>
+        </div>
+        <div class="cart-icon" onclick="location.href='cart.html'">
+          🛒
+          <span class="cart-count" id="cart-count"></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="wishlist-container">
+    <div class="wishlist-header">
+      <h1>♥ Your Wishlist</h1>
+      <p>Save your favorite posters for later</p>
+    </div>
+
+    <div id="wishlist-content">
+      <!-- Wishlist items will be loaded here -->
+    </div>
+  </div>
+
+  <script>
+    function renderWishlist() {
+      const wishlistItems = cartManager.getWishlistItems();
+      const wishlistContent = document.getElementById('wishlist-content');
+
+      if (wishlistItems.length === 0) {
+        wishlistContent.innerHTML = `
+          <div class="empty-wishlist">
+            <h2>Your wishlist is empty</h2>
+            <p>Add posters you love to your wishlist!</p>
+            <a href="index.html" class="btn">Start Shopping</a>
+          </div>
+        `;
+        return;
+      }
+
+      const itemsHtml = wishlistItems.map(product => `
+        <div class="wishlist-item">
+          <button class="remove-wishlist" onclick="removeFromWishlist('${product.id}')" title="Remove from wishlist">×</button>
+          <img src="${product.image}" alt="${product.title}">
+          <div class="wishlist-item-content">
+            <div class="wishlist-item-title">${product.title}</div>
+            <div class="wishlist-item-rating">⭐ ${product.rating}/5 — ${product.reviews} reviews</div>
+            <div class="wishlist-item-price">
+              <del>₹${product.originalPrice}</del>
+              ₹${product.salePrice}
+            </div>
+            <div class="wishlist-actions">
+              <a href="product.html?id=${product.id}" class="btn btn-primary">View Details</a>
+              <button class="btn btn-secondary" onclick="addToCart('${product.id}')">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      wishlistContent.innerHTML = `
+        <div class="wishlist-grid">
+          ${itemsHtml}
+        </div>
+
+        <div class="continue-shopping">
+          <a href="index.html">← Continue Shopping</a>
+        </div>
+      `;
+    }
+
+    function removeFromWishlist(productId) {
+      cartManager.removeFromWishlist(productId);
+      renderWishlist();
+    }
+
+    function addToCart(productId) {
+      const product = getProductById(productId);
+      // Add with default options
+      cartManager.addToCart(productId, 'A4', 'No Frame', 'Matte', 1);
+      alert('Added to cart!');
+
+      // Remove from wishlist after adding to cart
+      cartManager.removeFromWishlist(productId);
+      renderWishlist();
+    }
+
+    // Initialize
+    renderWishlist();
+    cartManager.updateCartCount();
+    cartManager.updateWishlistCount();
+  </script>
+
+</body>
+</html>

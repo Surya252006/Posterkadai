@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Design Blog - PosterKadai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #000;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      cursor: pointer;
+      display: inline-block;
+      animation: waveJump 2s ease-in-out infinite;
+    }
+    @keyframes waveJump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #f1a520;
+    }
+    .page-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .page-header p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+    .blog-section {
+      padding: 60px 20px;
+      background: #f8f9fa;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .blog-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .blog-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .blog-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .blog-content {
+      padding: 25px;
+    }
+    .blog-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #333;
+      line-height: 1.3;
+    }
+    .blog-content p {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .blog-date {
+      display: inline-block;
+      background: #f1a520;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .blog-categories {
+      padding: 40px 20px;
+      background: white;
+      text-align: center;
+    }
+    .category-filters {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .category-btn {
+      background: #f1a520;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .category-btn:hover,
+    .category-btn.active {
+      background: #ff6f61;
+    }
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 20px 30px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      border-top: 2px solid #f1a520;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 onclick="location.href='index.html'">PosterKadai</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="favourite.html">Favourites</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="page-header">
+    <h1>📝 Design Inspiration & Tips</h1>
+    <p>Stay updated with the latest trends, tips, and insights from the world of poster design</p>
+  </section>
+
+  <section class="blog-categories">
+    <div class="category-filters">
+      <button class="category-btn active" data-category="all">All Posts</button>
+      <button class="category-btn" data-category="trends">Trends</button>
+      <button class="category-btn" data-category="tips">Design Tips</button>
+      <button class="category-btn" data-category="inspiration">Inspiration</button>
+    </div>
+  </section>
+
+  <section class="blog-section">
+    <div class="blog-grid">
+      <article class="blog-card" data-category="trends">
+        <img src="product/blog/poster-trends.jpg" alt="2025 Poster Design Trends" />
+        <div class="blog-content">
+          <h3>2025 Poster Design Trends You Need to Know</h3>
+          <p>Discover the latest trends in poster design that are taking the world by storm. From minimalist approaches to bold typography, learn what's hot in 2025.</p>
+          <span class="blog-date">March 15, 2025</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="tips">
+        <img src="product/blog/color-psychology.jpg" alt="Color Psychology in Design" />
+        <div class="blog-content">
+          <h3>Color Psychology in Poster Design</h3>
+          <p>How colors influence emotions and how to use them effectively in your designs. Master the art of color selection for maximum impact.</p>
+          <span class="blog-date">March 10, 2025</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="tips">
+        <img src="product/blog/custom-design.jpg" alt="Custom Design Guide" />
+        <div class="blog-content">
+          <h3>Creating the Perfect Custom Poster</h3>
+          <p>A complete guide to designing personalized posters that reflect your style. Step-by-step instructions for stunning custom designs.</p>
+          <span class="blog-date">March 5, 2025</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="inspiration">
+        <img src="product/blog/typography-guide.jpg" alt="Typography Guide" />
+        <div class="blog-content">
+          <h3>Typography Secrets for Eye-Catching Posters</h3>
+          <p>Learn how to choose and combine fonts effectively. Typography tips that will make your posters stand out from the crowd.</p>
+          <span class="blog-date">February 28, 2025</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="trends">
+        <img src="product/blog/minimalist-design.jpg" alt="Minimalist Design Trends" />
+        <div class="blog-content">
+          <h3>The Rise of Minimalist Poster Design</h3>
+          <p>Why less is more in poster design. Explore the minimalist movement and how to create powerful designs with simple elements.</p>
+          <span class="blog-date">February 20, 2025</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="inspiration">
+        <img src="product/blog/cultural-posters.jpg" alt="Cultural Poster Design" />
+        <div class="blog-content">
+          <h3>Celebrating Culture Through Poster Art</h3>
+          <p>How traditional art forms inspire modern poster designs. Explore the fusion of cultural heritage and contemporary aesthetics.</p>
+          <span class="blog-date">February 15, 2025</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="tips">
+        <img src="product/blog/printing-guide.jpg" alt="Printing Guide" />
+        <div class="blog-content">
+          <h3>Essential Guide to Poster Printing</h3>
+          <p>Everything you need to know about printing posters. From paper selection to finishing touches, ensure your designs look perfect.</p>
+          <span class="blog-date">February 10, 2025</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="trends">
+        <img src="product/blog/digital-transformation.jpg" alt="Digital Transformation" />
+        <div class="blog-content">
+          <h3>Digital Transformation in Poster Design</h3>
+          <p>How technology is revolutionizing the poster industry. From AI-assisted design to augmented reality posters.</p>
+          <span class="blog-date">February 5, 2025</span>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="inspiration">
+        <img src="product/blog/artist-spotlight.jpg" alt="Artist Spotlight" />
+        <div class="blog-content">
+          <h3>Spotlight on Emerging Poster Artists</h3>
+          <p>Meet the new generation of poster designers who are pushing boundaries and redefining the art form.</p>
+          <span class="blog-date">January 30, 2025</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 PosterKadai. All rights reserved.
+  </footer>
+
+  <script>
+    // Blog category filtering
+    document.querySelectorAll('.category-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+
+        // Update active button
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter blog posts
+        document.querySelectorAll('.blog-card').forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

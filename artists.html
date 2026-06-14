@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Featured Artists - PosterKadai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #000;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      cursor: pointer;
+      display: inline-block;
+      animation: waveJump 2s ease-in-out infinite;
+    }
+    @keyframes waveJump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #f1a520;
+    }
+    .page-header {
+      background: linear-gradient(135deg, #f1a520 0%, #ff6f61 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .page-header p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+    .artists-section {
+      padding: 60px 20px;
+      background: #f8f9fa;
+    }
+    .artists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .artist-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .artist-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .artist-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    .artist-info {
+      padding: 25px;
+      text-align: center;
+    }
+    .artist-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .artist-info p {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    .artist-specialty {
+      display: inline-block;
+      background: #f1a520;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .artist-details {
+      padding: 30px;
+      background: white;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .artist-portfolio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .portfolio-item {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .portfolio-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .portfolio-item:hover img {
+      transform: scale(1.05);
+    }
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 20px 30px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      border-top: 2px solid #f1a520;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 onclick="location.href='index.html'">PosterKadai</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="favourite.html">Favourites</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="page-header">
+    <h1>🎨 Meet Our Featured Artists</h1>
+    <p>Discover the creative minds behind PosterKadai's unique designs</p>
+  </section>
+
+  <section class="artists-section">
+    <div class="artists-grid">
+      <div class="artist-card">
+        <img src="product/art/artist1.jpg" alt="Rajesh Kumar - Digital Artist" />
+        <div class="artist-info">
+          <h3>Rajesh Kumar</h3>
+          <p>Digital Artist specializing in minimalist designs with clean lines and modern aesthetics.</p>
+          <span class="artist-specialty">Minimalist Art</span>
+        </div>
+        <div class="artist-details">
+          <p>Rajesh has been creating digital art for over 8 years, with a focus on minimalist poster designs that combine simplicity with powerful messaging. His work has been featured in various design publications.</p>
+          <div class="artist-portfolio">
+            <div class="portfolio-item">
+              <img src="product/mot/mot1.png" alt="Minimalist Design 1" />
+            </div>
+            <div class="portfolio-item">
+              <img src="product/cus/cus1.png" alt="Minimalist Design 2" />
+            </div>
+            <div class="portfolio-item">
+              <img src="product/mot/mot2.png" alt="Minimalist Design 3" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <img src="product/art/artist2.jpg" alt="Priya Sharma - Traditional Artist" />
+        <div class="artist-info">
+          <h3>Priya Sharma</h3>
+          <p>Traditional artist blending Tamil cultural elements with contemporary design techniques.</p>
+          <span class="artist-specialty">Cultural Heritage</span>
+        </div>
+        <div class="artist-details">
+          <p>Priya brings traditional Tamil art forms into the modern world through her unique poster designs. Her work celebrates cultural heritage while maintaining contemporary appeal.</p>
+          <div class="artist-portfolio">
+            <div class="portfolio-item">
+              <img src="product/tam/tam1.png" alt="Cultural Design 1" />
+            </div>
+            <div class="portfolio-item">
+              <img src="product/mot/mot1.png" alt="Cultural Design 2" />
+            </div>
+            <div class="portfolio-item">
+              <img src="product/cin/cin1.png" alt="Cultural Design 3" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <img src="product/art/artist3.jpg" alt="Amit Patel - Street Artist" />
+        <div class="artist-info">
+          <h3>Amit Patel</h3>
+          <p>Street artist creating bold urban designs and contemporary abstract art pieces.</p>
+          <span class="artist-specialty">Urban Art</span>
+        </div>
+        <div class="artist-details">
+          <p>Amit's background in street art brings an edgy, urban vibe to PosterKadai's collection. His abstract designs and graffiti-inspired work add a modern, street-smart aesthetic.</p>
+          <div class="artist-portfolio">
+            <div class="portfolio-item">
+              <img src="product/bik/bik1.png" alt="Urban Design 1" />
+            </div>
+            <div class="portfolio-item">
+              <img src="product/car/car1.png" alt="Urban Design 2" />
+            </div>
+            <div class="portfolio-item">
+              <img src="product/st/sta1.png" alt="Urban Design 3" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <img src="product/art/artist4.jpg" alt="Sneha Reddy - Nature Artist" />
+        <div class="artist-info">
+          <h3>Sneha Reddy</h3>
+          <p>Nature-inspired artist capturing the beauty of landscapes and natural elements.</p>
+          <span class="artist-specialty">Nature & Landscapes</span>
+        </div>
+        <div class="artist-details">
+          <p>Sneha specializes in nature photography and landscape art, creating posters that bring the tranquility of natural beauty into urban spaces.</p>
+          <div class="artist-portfolio">
+            <div class="portfolio-item">
+              <img src="product/mot/mot2.png" alt="Nature Design 1" />
+            </div>
+            <div class="portfolio-item">
+              <img src="product/mus/mus1.png" alt="Nature Design 2" />
+            </div>
+            <div class="portfolio-item">
+              <img src="product/cin/cin2.png" alt="Nature Design 3" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <img src="product/art/artist5.jpg" alt="Vikram Singh - Typography Artist" />
+        <div class="artist-info">
+          <h3>Vikram Singh</h3>
+          <p>Typography specialist creating motivational quotes with stunning visual impact.</p>
+          <span class="artist-specialty">Typography & Quotes</span>
+        </div>
+        <div class="artist-details">
+          <p>Vikram combines his love for lettering with motivational messaging to create posters that inspire and uplift. His typography work spans multiple languages and styles.</p>
+          <div class="artist-portfolio">
+            <div class="portfolio-item">
+              <img src="product/mot/mot1.png" alt="Typography Design 1" />
+            </div>
+            <div class="portfolio-item">
+              <img src="product/tam/tam1.png" alt="Typography Design 2" />
+            </div>
+            <div class="portfolio-item">
+              <img src="product/st/sta1.png" alt="Typography Design 3" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <img src="product/art/artist6.jpg" alt="Karthik Venkatesh - Cinema Artist" />
+        <div class="artist-info">
+          <h3>Karthik Venkatesh</h3>
+          <p>Cinema enthusiast creating iconic movie posters and dialogue-based designs.</p>
+          <span class="artist-specialty">Cinema & Entertainment</span>
+        </div>
+        <div class="artist-details">
+          <p>Karthik's passion for cinema drives his creation of movie-inspired posters. From classic dialogues to modern film aesthetics, his work captures the magic of storytelling.</p>
+          <div class="artist-portfolio">
+            <div class="portfolio-item">
+              <img src="product/cin/cin1.png" alt="Cinema Design 1" />
+            </div>
+            <div class="portfolio-item">
+              <img src="product/cin/cin2.png" alt="Cinema Design 2" />
+            </div>
+            <div class="portfolio-item">
+              <img src="product/mot/mot1.png" alt="Cinema Design 3" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 PosterKadai. All rights reserved.
+  </footer>
+
+</body>
+</html>

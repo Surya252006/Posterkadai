@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PosterKadai - Product Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="products.js"></script>
+  <script src="cart.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f8f8f8;
+    }
+
+    header {
+      background-color: #000;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      cursor: pointer;
+      animation: waveJump 2s infinite ease-in-out;
+    }
+
+    @keyframes waveJump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #f1a520;
+    }
+
+    .cart-wishlist {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+    }
+
+    .wishlist-icon, .cart-icon {
+      position: relative;
+      margin-left: 15px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    .wishlist-icon:hover, .cart-icon:hover {
+      color: #f1a520;
+    }
+
+    .wishlist-count, .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #f1a520;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .poster-image {
+      flex: 1 1 400px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .poster-image img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .details {
+      flex: 1 1 500px;
+      padding: 20px;
+    }
+
+    .details h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .rating {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .price {
+      margin: 15px 0;
+      font-size: 22px;
+    }
+
+    .price del {
+      color: gray;
+      margin-right: 10px;
+    }
+
+    .price .sale {
+      color: #d9534f;
+      font-weight: bold;
+    }
+
+    .variants {
+      margin: 20px 0;
+    }
+
+    .variant-group {
+      margin-bottom: 20px;
+    }
+
+    .variant-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .variant-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .variant-btn {
+      padding: 8px 16px;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+
+    .variant-btn.active, .variant-btn:hover {
+      background-color: #f1a520;
+      color: #fff;
+      border-color: #f1a520;
+    }
+
+    .quantity {
+      margin: 20px 0;
+    }
+
+    .quantity label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .quantity input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 80px;
+    }
+
+    .action-buttons {
+      margin: 30px 0;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: #f1a520;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #e6951a;
+    }
+
+    .btn-secondary {
+      background: #25D366;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #1ebe57;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #f1a520;
+      border: 2px solid #f1a520;
+    }
+
+    .btn-outline:hover {
+      background: #f1a520;
+      color: white;
+    }
+
+    .success-message {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #28a745;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+      display: none;
+      font-weight: 600;
+    }
+
+    .whatsapp-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-image: url('https://img.icons8.com/ios-filled/50/25d366/whatsapp.png');
+      background-size: cover;
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .poster-image, .details {
+        flex: 1 1 100%;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        flex: none;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header / Logo + Navigation -->
+  <header>
+    <h1 onclick="location.href='index.html'">PosterKadai</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contact</a>
+      <div class="cart-wishlist">
+        <div class="wishlist-icon" onclick="location.href='wishlist.html'">
+          ♥
+          <span class="wishlist-count" id="wishlist-count"></span>
+        </div>
+        <div class="cart-icon" onclick="location.href='cart.html'">
+          🛒
+          <span class="cart-count" id="cart-count"></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Success Message -->
+  <div class="success-message" id="successMessage"></div>
+
+  <!-- Product Container -->
+  <div class="container">
+    <div class="poster-image">
+      <img id="posterImg" src="" alt="Poster Image" />
+    </div>
+    <div class="details">
+      <h1 id="posterTitle">Loading...</h1>
+      <div class="rating" id="rating">Loading...</div>
+      <div class="price" id="price">Loading...</div>
+
+      <div class="variants">
+        <div class="variant-group">
+          <label>Size:</label>
+          <div class="variant-buttons" id="sizeButtons"></div>
+        </div>
+
+        <div class="variant-group">
+          <label>Frame:</label>
+          <div class="variant-buttons" id="frameButtons"></div>
+        </div>
+
+        <div class="variant-group">
+          <label>Finish:</label>
+          <div class="variant-buttons" id="finishButtons"></div>
+        </div>
+      </div>
+
+      <div class="quantity">
+        <label for="qty">Quantity:</label>
+        <input type="number" id="qty" value="1" min="1">
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" id="addToCartBtn" onclick="addToCart()">Add to Cart</button>
+        <button class="btn btn-outline" id="addToWishlistBtn" onclick="toggleWishlist()">Add to Wishlist</button>
+        <button class="btn btn-secondary" id="buyNowBtn" onclick="buyNow()">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp Floating Icon -->
+  <div class="whatsapp-icon" onclick="buyNow()"></div>
+
+  <!-- Script for Product Management -->
+  <script>
+    let currentProduct = null;
+    let selectedSize = 'A4';
+    let selectedFrame = 'No Frame';
+    let selectedFinish = 'Matte';
+
+    // Load product data
+    function loadProduct() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id') || 'mot1';
+
+      currentProduct = getProductById(productId);
+
+      if (!currentProduct) {
+        // Redirect to home if product not found
+        window.location.href = 'index.html';
+        return;
+      }
+
+      // Update page content
+      document.getElementById('posterImg').src = currentProduct.image;
+      document.getElementById('posterTitle').textContent = currentProduct.title;
+      document.getElementById('rating').innerHTML = `⭐ ${currentProduct.rating}/5 — ${currentProduct.reviews} reviews`;
+      document.getElementById('price').innerHTML = `
+        <del>₹${currentProduct.originalPrice}</del>
+        <span class="sale">₹${currentProduct.prices[selectedSize][selectedFrame]}</span>
+        <span style="background:#d9534f; color:white; padding:2px 6px; border-radius:4px; font-size:14px; margin-left:10px;">Sale</span>
+      `;
+
+      // Generate variant buttons
+      generateVariantButtons('sizeButtons', currentProduct.variants.sizes, selectedSize, setSize);
+      generateVariantButtons('frameButtons', currentProduct.variants.frames, selectedFrame, setFrame);
+      generateVariantButtons('finishButtons', currentProduct.variants.finishes, selectedFinish, setFinish);
+
+      updatePrice();
+    }
+
+    function generateVariantButtons(containerId, options, selectedValue, callback) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = options.map(option => `
+        <button class="variant-btn ${option === selectedValue ? 'active' : ''}"
+                onclick="${callback.name}('${option}')">${option}</button>
+      `).join('');
+    }
+
+    function setSize(size) {
+      selectedSize = size;
+      updateVariantButtons('sizeButtons', size);
+      updatePrice();
+    }
+
+    function setFrame(frame) {
+      selectedFrame = frame;
+      updateVariantButtons('frameButtons', frame);
+      updatePrice();
+    }
+
+    function setFinish(finish) {
+      selectedFinish = finish;
+      updateVariantButtons('finishButtons', finish);
+    }
+
+    function updateVariantButtons(containerId, selectedValue) {
+      const buttons = document.querySelectorAll(`#${containerId} .variant-btn`);
+      buttons.forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === selectedValue);
+      });
+    }
+
+    function updatePrice() {
+      if (currentProduct) {
+        const price = currentProduct.prices[selectedSize][selectedFrame];
+        document.querySelector('#price .sale').textContent = `₹${price}`;
+      }
+    }
+
+    function addToCart() {
+      const quantity = parseInt(document.getElementById('qty').value) || 1;
+      cartManager.addToCart(currentProduct.id, selectedSize, selectedFrame, selectedFinish, quantity);
+      showSuccessMessage('Added to cart successfully!');
+    }
+
+    function toggleWishlist() {
+      const btn = document.getElementById('addToWishlistBtn');
+      if (cartManager.isInWishlist(currentProduct.id)) {
+        cartManager.removeFromWishlist(currentProduct.id);
+        btn.textContent = 'Add to Wishlist';
+        showSuccessMessage('Removed from wishlist!');
+      } else {
+        cartManager.addToWishlist(currentProduct.id);
+        btn.textContent = 'Remove from Wishlist';
+        showSuccessMessage('Added to wishlist!');
+      }
+    }
+
+    function buyNow() {
+      const quantity = parseInt(document.getElementById('qty').value) || 1;
+      const message = cartManager.generateWhatsAppMessage('single', currentProduct.id, selectedSize, selectedFrame, selectedFinish, quantity);
+      const phone = '919486230195';
+      const link = `https://wa.me/${phone}?text=${message}`;
+      window.open(link, '_blank');
+    }
+
+    function showSuccessMessage(message) {
+      const msg = document.getElementById('successMessage');
+      msg.textContent = message;
+      msg.style.display = 'block';
+      setTimeout(() => {
+        msg.style.display = 'none';
+      }, 3000);
+    }
+
+    // Initialize
+    loadProduct();
+    cartManager.updateCartCount();
+    cartManager.updateWishlistCount();
+
+    // Update wishlist button state
+    setTimeout(() => {
+      if (currentProduct && cartManager.isInWishlist(currentProduct.id)) {
+        document.getElementById('addToWishlistBtn').textContent = 'Remove from Wishlist';
+      }
+    }, 100);
+  </script>
+
+</body>
+</html>

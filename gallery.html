@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Design Gallery - PosterKadai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #000;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      cursor: pointer;
+      display: inline-block;
+      animation: waveJump 2s ease-in-out infinite;
+    }
+    @keyframes waveJump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes slideIn {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #f1a520;
+    }
+    .page-header {
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .page-header p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+    .gallery-section {
+      padding: 60px 20px;
+      background: #f8f9fa;
+    }
+    .gallery-filters {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: #f1a520;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #ff6f61;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 111, 97, 0.4);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      transform: translateX(-100vw);
+      opacity: 0;
+      animation: slideIn 0.8s ease-out forwards;
+    }
+    .gallery-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    .gallery-item:nth-child(1) { animation-delay: 0s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.1s; }
+    .gallery-item:nth-child(3) { animation-delay: 0.2s; }
+    .gallery-item:nth-child(4) { animation-delay: 0.3s; }
+    .gallery-item:nth-child(5) { animation-delay: 0.4s; }
+    .gallery-item:nth-child(6) { animation-delay: 0.5s; }
+    .gallery-item:nth-child(7) { animation-delay: 0.6s; }
+    .gallery-item:nth-child(8) { animation-delay: 0.7s; }
+    .gallery-item:nth-child(9) { animation-delay: 0.8s; }
+    .gallery-item:nth-child(10) { animation-delay: 0.9s; }
+    .gallery-item:nth-child(11) { animation-delay: 1.0s; }
+    .gallery-item:nth-child(12) { animation-delay: 1.1s; }
+    .gallery-item:nth-child(13) { animation-delay: 1.2s; }
+    .gallery-item:nth-child(14) { animation-delay: 1.3s; }
+    .gallery-item:nth-child(15) { animation-delay: 1.4s; }
+    .gallery-item:nth-child(16) { animation-delay: 1.5s; }
+    .gallery-item:nth-child(17) { animation-delay: 1.6s; }
+    .gallery-item:nth-child(18) { animation-delay: 1.7s; }
+    .gallery-item img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+      color: white;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+    .gallery-overlay h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+    }
+    .gallery-overlay p {
+      margin: 0 0 15px;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    .order-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 10;
+      opacity: 0.9;
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+    .order-btn:hover {
+      background: #1ebe57;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+      opacity: 1;
+    }
+    .load-more {
+      display: block;
+      margin: 50px auto 0;
+      background: #f1a520;
+      color: white;
+      padding: 15px 40px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 2px solid #f1a520;
+    }
+    .load-more:hover {
+      background: transparent;
+      color: #f1a520;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(241, 165, 32, 0.4);
+    }
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 20px 30px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      border-top: 2px solid #f1a520;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 onclick="location.href='index.html'">PosterKadai</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="favourite.html">Favourites</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="page-header">
+    <h1>🖼️ Our Design Gallery</h1>
+    <p>Explore our complete collection of stunning poster designs</p>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-filters">
+      <button class="filter-btn active" data-filter="all">All Designs</button>
+      <button class="filter-btn" data-filter="motivational">Motivational</button>
+      <button class="filter-btn" data-filter="cinema">Cinema</button>
+      <button class="filter-btn" data-filter="custom">Custom</button>
+      <button class="filter-btn" data-filter="nature">Nature</button>
+      <button class="filter-btn" data-filter="abstract">Abstract</button>
+      <button class="filter-btn" data-filter="typography">Typography</button>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item" data-category="motivational" onclick="window.location.href='product/mot/mot1.html'">
+        <img src="product/mot/mot1.png" alt="Dream Big Motivational Poster" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/mot/mot1.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Dream Big</h3>
+          <p>Inspiring typography with modern design elements</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="cinema" onclick="window.location.href='product/cin/cin1.html'">
+        <img src="product/cin/cin1.png" alt="Classic Cinema Poster" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/cin/cin1.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Blockbuster Classic</h3>
+          <p>Iconic movie poster design with vintage aesthetics</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="custom" onclick="window.location.href='product/cus/cus1.html'">
+        <img src="product/cus/cus1.png" alt="Custom Name Art" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/cus/cus1.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Personalized Art</h3>
+          <p>Custom name designs with unique typography</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="nature" onclick="window.location.href='product/mot/mot2.html'">
+        <img src="product/mot/mot2.png" alt="Mountain Landscape" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/mot/mot2.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Mountain Vista</h3>
+          <p>Serene landscape photography with inspirational quotes</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="abstract" onclick="window.location.href='product/car/car1.html'">
+        <img src="product/car/car1.png" alt="Abstract Car Design" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/car/car1.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Urban Abstract</h3>
+          <p>Bold shapes and vibrant colors in abstract form</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="typography" onclick="window.location.href='product/tam/tam1.html'">
+        <img src="product/tam/tam1.png" alt="Tamil Quote Typography" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/tam/tam1.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Cultural Typography</h3>
+          <p>Beautiful Tamil script with modern design elements</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="motivational" onclick="window.location.href='product/st/sta1.html'">
+        <img src="product/st/sta1.png" alt="Startup Motivation" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/st/sta1.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Entrepreneur Spirit</h3>
+          <p>Motivational quotes for startup founders</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="cinema" onclick="window.location.href='product/cin/cin2.html'">
+        <img src="product/cin/cin2.png" alt="Modern Cinema" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/cin/cin2.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Contemporary Cinema</h3>
+          <p>Modern movie posters with sleek design</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="custom" onclick="window.location.href='product/cus/cus2.html'">
+        <img src="product/cus/cus2.jpeg" alt="Minimalist Custom Art" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/cus/cus2.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Minimalist Custom</h3>
+          <p>Clean, simple designs for personalized posters</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="nature" onclick="window.location.href='product/mus/mus1.html'">
+        <img src="product/mus/mus1.png" alt="Music and Nature" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/mus/mus1.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Melodic Landscapes</h3>
+          <p>Harmony between music themes and natural beauty</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="abstract" onclick="window.location.href='product/bik/bik1.html'">
+        <img src="product/bik/bik1.png" alt="Bike Abstract" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/bik/bik1.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Speed & Motion</h3>
+          <p>Dynamic abstract designs inspired by motorcycles</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="typography" onclick="window.location.href='product/tam/tam3.html'">
+        <img src="product/mot/mot1.png" alt="Bold Typography" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/tam/tam3.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Typography Masterpiece</h3>
+          <p>Striking letterforms that make a statement</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="motivational" onclick="window.location.href='product/mot/mot3.html'">
+        <img src="product/mot/mot3.png" alt="Success Quote" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/mot/mot3.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Path to Success</h3>
+          <p>Inspirational quotes for achieving your goals</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="cinema" onclick="window.location.href='product/cin/cin3.html'">
+        <img src="product/cin/cin3.png" alt="Drama Cinema" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/cin/cin3.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Dramatic Cinema</h3>
+          <p>Intense movie posters with emotional depth</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="custom" onclick="window.location.href='product/cus/cus3.html'">
+        <img src="product/cus/cus3.png" alt="Custom Typography" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/cus/cus3.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Custom Lettering</h3>
+          <p>Handcrafted typography for personal messages</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="nature" onclick="window.location.href='product/mot/mot2.html'">
+        <img src="product/mot/mot2.png" alt="Ocean Serenity" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/mot/mot2.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Ocean Dreams</h3>
+          <p>Peaceful ocean scenes with calming aesthetics</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="abstract" onclick="window.location.href='product/car/car2.html'">
+        <img src="product/car/car2.png" alt="Car Abstract 2" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/car/car2.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Automotive Art</h3>
+          <p>Abstract interpretations of automotive design</p>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="typography" onclick="window.location.href='product/tam/tam2.html'">
+        <img src="product/tam/tam2.png" alt="Tamil Typography 2" />
+        <button class="order-btn" onclick="event.stopPropagation(); window.location.href='product/tam/tam2.html'">Place Order</button>
+        <div class="gallery-overlay">
+          <h3>Script Mastery</h3>
+          <p>Beautiful Tamil calligraphy and lettering</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="#" class="load-more">Load More Designs</a>
+  </section>
+
+  <footer>
+    © 2025 PosterKadai. All rights reserved.
+  </footer>
+
+  <script>
+    // Gallery filtering functionality
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Update active button
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+          if (filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Load more functionality (placeholder)
+    document.querySelector('.load-more').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('More designs coming soon! Stay tuned for updates.');
+    });
+  </script>
+
+</body>
+</html>

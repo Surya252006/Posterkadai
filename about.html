@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us - PosterKadai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background-color: #000;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      cursor: pointer;
+      display: inline-block;
+      animation: waveJump 2s ease-in-out infinite;
+    }
+    @keyframes waveJump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #f1a520;
+    }
+    .page-header {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('product/about/hero-bg.jpg') center/cover no-repeat;
+      opacity: 0.1;
+    }
+    .page-header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+    .page-header p {
+      font-size: 1.4rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+    .about-content {
+      padding: 60px 20px;
+      background: #f8f9fa;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .about-text {
+      padding: 40px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .about-text h2 {
+      color: #f1a520;
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+    .about-text p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      color: #555;
+    }
+    .about-image {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    .about-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    .stats-section {
+      padding: 60px 20px;
+      background: white;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(135deg, #f1a520 0%, #ff6f61 100%);
+      color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(241, 165, 32, 0.3);
+    }
+    .stat-item h3 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .stat-item p {
+      font-size: 1.2rem;
+      margin: 0;
+      opacity: 0.9;
+    }
+    .team-section {
+      padding: 60px 20px;
+      background: #f8f9fa;
+    }
+    .team-section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #f1a520;
+      margin-bottom: 50px;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .team-member {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .team-member:hover {
+      transform: translateY(-10px);
+    }
+    .team-member img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    .team-member h3 {
+      font-size: 1.5rem;
+      margin: 20px 0 10px;
+      color: #333;
+    }
+    .team-member p {
+      color: #f1a520;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    .team-member .bio {
+      padding: 0 20px 20px;
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .values-section {
+      padding: 60px 20px;
+      background: white;
+    }
+    .values-section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #f1a520;
+      margin-bottom: 50px;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .value-item {
+      text-align: center;
+      padding: 40px 30px;
+      background: #f8f9fa;
+      border-radius: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .value-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+    .value-item .icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .value-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    .value-item p {
+      color: #666;
+      line-height: 1.6;
+    }
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 20px 30px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      border-top: 2px solid #f1a520;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 onclick="location.href='index.html'">PosterKadai</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="favourite.html">Favourites</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="page-header">
+    <h1>🏢 About PosterKadai</h1>
+    <p>Where Art Meets Passion - Creating posters that tell your story</p>
+  </section>
+
+  <section class="about-content">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Our Story</h2>
+        <p>Founded in 2020 in the heart of Coimbatore, PosterKadai began as a small passion project by a group of design enthusiasts who believed that everyone deserves access to beautiful, meaningful art.</p>
+        <p>What started as a weekend hobby has grown into a thriving creative community, combining traditional artistry with modern design techniques. We believe that posters are more than just wall decorations – they're storytellers, mood-setters, and conversation starters.</p>
+        <p>Our journey has been fueled by the joy of seeing our customers' faces light up when they receive their custom-designed posters. Every piece we create carries a piece of our passion and dedication to quality.</p>
+      </div>
+      <div class="about-image">
+        <img src="product/about/team-workshop.jpg" alt="PosterKadai Team at Work" />
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <h3>50K+</h3>
+        <p>Happy Customers</p>
+      </div>
+      <div class="stat-item">
+        <h3>1000+</h3>
+        <p>Unique Designs</p>
+      </div>
+      <div class="stat-item">
+        <h3>25+</h3>
+        <p>Creative Artists</p>
+      </div>
+      <div class="stat-item">
+        <h3>4.9/5</h3>
+        <p>Customer Rating</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <h2>Meet Our Creative Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="product/about/founder.jpg" alt="Arun Kumar - Founder & CEO" />
+        <h3>Arun Kumar</h3>
+        <p>Founder & CEO</p>
+        <div class="bio">Visionary leader with 10+ years in design and entrepreneurship. Passionate about making art accessible to everyone.</div>
+      </div>
+      <div class="team-member">
+        <img src="product/about/creative-director.jpg" alt="Meera Iyer - Creative Director" />
+        <h3>Meera Iyer</h3>
+        <p>Creative Director</p>
+        <div class="bio">Award-winning designer specializing in typography and visual storytelling. Leads our design innovation initiatives.</div>
+      </div>
+      <div class="team-member">
+        <img src="product/about/art-director.jpg" alt="Rajesh Patel - Art Director" />
+        <h3>Rajesh Patel</h3>
+        <p>Art Director</p>
+        <div class="bio">Master of digital and traditional art forms. Ensures every poster meets our uncompromising quality standards.</div>
+      </div>
+      <div class="team-member">
+        <img src="product/about/customer-care.jpg" alt="Priya Singh - Customer Care Lead" />
+        <h3>Priya Singh</h3>
+        <p>Customer Care Lead</p>
+        <div class="bio">Dedicated to ensuring customer satisfaction. Her smile and expertise make every interaction memorable.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values-section">
+    <h2>Our Core Values</h2>
+    <div class="values-grid">
+      <div class="value-item">
+        <span class="icon">🎨</span>
+        <h3>Creativity First</h3>
+        <p>We believe in pushing boundaries and exploring new artistic horizons. Every design is an opportunity to create something extraordinary.</p>
+      </div>
+      <div class="value-item">
+        <span class="icon">⭐</span>
+        <h3>Quality Excellence</h3>
+        <p>From concept to delivery, we maintain the highest standards. Your satisfaction is our ultimate measure of success.</p>
+      </div>
+      <div class="value-item">
+        <span class="icon">🤝</span>
+        <h3>Customer Centric</h3>
+        <p>You are at the heart of everything we do. Your vision, preferences, and happiness guide our creative process.</p>
+      </div>
+      <div class="value-item">
+        <span class="icon">🌱</span>
+        <h3>Sustainable Practices</h3>
+        <p>We care about our planet. Using eco-friendly materials and processes to create beautiful art responsibly.</p>
+      </div>
+      <div class="value-item">
+        <span class="icon">🚀</span>
+        <h3>Innovation</h3>
+        <p>Embracing technology and trends while honoring traditional art forms. Always evolving, never stagnant.</p>
+      </div>
+      <div class="value-item">
+        <span class="icon">❤️</span>
+        <h3>Passion Driven</h3>
+        <p>Art is our passion, not just our profession. This passion shines through in every poster we create.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 PosterKadai. All rights reserved.
+  </footer>
+
+</body>
+</html>

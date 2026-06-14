@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Car Posters - PosterKadai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #fff;
+    }
+
+    header {
+      background-color: #000;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      cursor: pointer;
+      animation: waveJump 2s infinite ease-in-out;
+    }
+
+    @keyframes waveJump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #f1a520;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      color: #f1a520;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .poster-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .poster-item {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .poster-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .poster-item img {
+      width: 100%;
+      display: block;
+    }
+
+    .whatsapp-order {
+      display: block;
+      background-color: #25D366;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 16px;
+      border-top: 1px solid #1ebe5d;
+      transition: background 0.3s;
+    }
+
+    .whatsapp-order:hover {
+      background-color: #1ebe5d;
+    }
+
+    .back-link {
+      display: block;
+      margin: 40px auto 10px;
+      width: max-content;
+      color: #f1a520;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-align: center;
+      border: 2px solid #f1a520;
+      padding: 10px 20px;
+      border-radius: 30px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .back-link:hover {
+      background: #f1a520;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 onclick="location.href='index.html'">PosterKadai</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="index.html#custom">Custom</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Car Posters</h2>
+    <div class="poster-gallery">
+
+      <div class="poster-item">
+        <img src="product/car/car1.png" alt="Car Poster 1" />
+        <a class="whatsapp-order" href="product/car/car1.html" target="_blank">Place order</a>
+      </div>
+      
+      <div class="poster-item">
+        <img src="product/car/car2.png" alt="Car Poster 2" />
+        <a class="whatsapp-order" href="product/car/car2.html" target="_blank">Place order</a>
+      </div>
+      
+      <div class="poster-item">
+        <img src="product/car/car3.png" alt="Car Poster 3" />
+        <a class="whatsapp-order" href="product/car/car3.html" target="_blank">Place order</a>
+      </div>
+
+    </div>
+
+    <a href="index.html" class="back-link">← Back to Categories</a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shopping Cart - PosterKadai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="products.js"></script>
+  <script src="cart.js"></script>
+  <style>
+    .cart-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .cart-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .cart-header h1 {
+      color: #f1a520;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 60px 20px;
+      background: #f8f8f8;
+      border-radius: 10px;
+      margin: 40px 0;
+    }
+
+    .empty-cart h2 {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .empty-cart .btn {
+      background: #f1a520;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .cart-items {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .cart-item {
+      display: flex;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      align-items: center;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 20px;
+    }
+
+    .item-details {
+      flex: 1;
+    }
+
+    .item-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .item-options {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .item-price {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #f1a520;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .quantity-btn {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .quantity-input {
+      width: 60px;
+      text-align: center;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .remove-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-left: 20px;
+    }
+
+    .remove-btn:hover {
+      background: #c82333;
+    }
+
+    .cart-summary {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .summary-total {
+      border-top: 2px solid #eee;
+      padding-top: 15px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #f1a520;
+    }
+
+    .checkout-section {
+      text-align: center;
+    }
+
+    .checkout-btn {
+      background: #25D366;
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+
+    .checkout-btn:hover {
+      background: #1ebe57;
+    }
+
+    .continue-shopping {
+      display: inline-block;
+      margin-top: 20px;
+      color: #f1a520;
+      text-decoration: none;
+      font-weight: 600;
+      border: 2px solid #f1a520;
+      padding: 10px 20px;
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+
+    .continue-shopping:hover {
+      background: #f1a520;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .cart-item {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .item-image {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+
+      .quantity-controls {
+        justify-content: center;
+      }
+
+      .remove-btn {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+
+      .summary-row {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 onclick="location.href='index.html'">PosterKadai</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contact</a>
+      <div class="cart-wishlist">
+        <div class="wishlist-icon" onclick="location.href='wishlist.html'">
+          ♥
+          <span class="wishlist-count" id="wishlist-count"></span>
+        </div>
+        <div class="cart-icon" onclick="location.href='cart.html'">
+          🛒
+          <span class="cart-count" id="cart-count"></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="cart-container">
+    <div class="cart-header">
+      <h1>🛒 Your Shopping Cart</h1>
+    </div>
+
+    <div id="cart-content">
+      <!-- Cart items will be loaded here -->
+    </div>
+  </div>
+
+  <script>
+    function renderCart() {
+      const cartItems = cartManager.getCartItems();
+      const cartContent = document.getElementById('cart-content');
+
+      if (cartItems.length === 0) {
+        cartContent.innerHTML = `
+          <div class="empty-cart">
+            <h2>Your cart is empty</h2>
+            <p>Add some beautiful posters to your cart!</p>
+            <a href="index.html" class="btn">Continue Shopping</a>
+          </div>
+        `;
+        return;
+      }
+
+      const itemsHtml = cartItems.map((item, index) => `
+        <div class="cart-item">
+          <img src="${item.product.image}" alt="${item.product.title}" class="item-image">
+          <div class="item-details">
+            <div class="item-title">${item.product.title}</div>
+            <div class="item-options">
+              Size: ${item.size} | Frame: ${item.frame} | Finish: ${item.finish}
+            </div>
+            <div class="item-price">₹${item.unitPrice} each</div>
+            <div class="quantity-controls">
+              <button class="quantity-btn" onclick="updateQuantity(${index}, ${item.quantity - 1})">-</button>
+              <input type="number" class="quantity-input" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)">
+              <button class="quantity-btn" onclick="updateQuantity(${index}, ${item.quantity + 1})">+</button>
+            </div>
+          </div>
+          <div>
+            <div class="item-price">₹${item.totalPrice}</div>
+            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+          </div>
+        </div>
+      `).join('');
+
+      const total = cartManager.getCartTotal();
+
+      cartContent.innerHTML = `
+        <div class="cart-items">
+          ${itemsHtml}
+        </div>
+
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>Subtotal:</span>
+            <span>₹${total}</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping:</span>
+            <span>Free</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span>Total:</span>
+            <span>₹${total}</span>
+          </div>
+        </div>
+
+        <div class="checkout-section">
+          <a href="#" class="checkout-btn" onclick="checkout()">📱 Complete Order via WhatsApp</a>
+          <br>
+          <a href="index.html" class="continue-shopping">← Continue Shopping</a>
+        </div>
+      `;
+    }
+
+    function updateQuantity(index, newQuantity) {
+      cartManager.updateCartItemQuantity(index, parseInt(newQuantity));
+      renderCart();
+    }
+
+    function removeItem(index) {
+      if (confirm('Are you sure you want to remove this item from your cart?')) {
+        cartManager.removeFromCart(index);
+        renderCart();
+      }
+    }
+
+    function checkout() {
+      const message = cartManager.generateWhatsAppMessage('cart');
+      const phone = '919486230195';
+      const link = `https://wa.me/${phone}?text=${message}`;
+      window.open(link, '_blank');
+    }
+
+    // Initialize
+    renderCart();
+    cartManager.updateCartCount();
+    cartManager.updateWishlistCount();
+  </script>
+
+</body>
+</html>
